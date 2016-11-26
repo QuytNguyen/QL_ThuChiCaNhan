@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:text="Hạng mục thu"
+        android:id="@+id/textView"
+        android:background="#1e91d3"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="380dp"
+        android:id="@+id/listViewHangMucThu"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm"
+        android:id="@+id/buttonThemHangMucThu"
+        android:layout_below="@+id/listView"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

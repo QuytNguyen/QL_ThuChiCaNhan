@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên chủ nợ"
+        android:id="@+id/textView2"
+        android:layout_marginTop="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editChuNo"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Từ tài khoản"
+        android:id="@+id/textView3"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <Spinner
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:id="@+id/spinnerTaiKhoanNo"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số tiền mượn nợ"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="38dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editSTT"
+        android:layout_below="@+id/editTextLaiXuatNo"
+        android:layout_alignLeft="@+id/editTextLaiXuatNo"
+        android:layout_alignStart="@+id/editTextLaiXuatNo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VND"
+        android:textColor="#ef1111"
+        android:id="@+id/textView6"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_toRightOf="@+id/editNgayThu"
+        android:layout_toEndOf="@+id/editNgayThu" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ngày thu"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textLaiXuatNo"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+ />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editNgayThu"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/buttonaddThu"
+        android:layout_alignStart="@+id/buttonaddThu" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonDataChi"
+        android:text="Chọn"
+        android:layout_alignTop="@+id/editSTT"
+        android:layout_toRightOf="@+id/editSTT"
+        android:layout_toEndOf="@+id/editSTT" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm Khoản thu"
+        android:id="@+id/buttonaddThu"
+        android:layout_below="@+id/buttonDataChi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lãi xuất"
+        android:id="@+id/textLaiXuatNo"
+        android:layout_below="@+id/textView5"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_marginTop="36dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editTextLaiXuatNo"
+        android:layout_alignBottom="@+id/textLaiXuatNo"
+        android:layout_alignLeft="@+id/spinnerTaiKhoanNo"
+        android:layout_alignStart="@+id/spinnerTaiKhoanNo" />
+</RelativeLayout>
