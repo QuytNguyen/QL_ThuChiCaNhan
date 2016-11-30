@@ -1,7 +1,7 @@
 package com.example.giang.ql_thuchicanhan;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TabHost;
 
 public class No extends AppCompatActivity {

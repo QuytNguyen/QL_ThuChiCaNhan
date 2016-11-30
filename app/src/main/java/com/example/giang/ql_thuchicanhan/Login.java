@@ -3,10 +3,9 @@ package com.example.giang.ql_thuchicanhan;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
@@ -52,13 +47,12 @@ public class Login extends AppCompatActivity {
                         editor.commit();
                         Intent intent = new Intent(Login.this, Main.class);
                         startActivity(intent);
-                    } else {
-                        editor.putBoolean("isSave", false);
-                        editor.commit();
-                        Toast.makeText(Login.this, "Sai thông tin đăng nhập", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                    return;
                 }
+                editor.putBoolean("isSave", false);
+                editor.commit();
+                Toast.makeText(Login.this, "Sai thông tin đăng nhập", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,6 +61,22 @@ public class Login extends AppCompatActivity {
         if (Save) {
             Intent intent = new Intent(Login.this, Main.class);
             startActivity(intent);
+        } else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            if (list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (edtName.getText().toString().equals(list.get(i).USER) && edtPass.getText().toString().equals(list.get(i).PASS)) {
+                        editor.putBoolean("isSave", true);
+                        editor.commit();
+                        Intent intent = new Intent(Login.this, Main.class);
+                        startActivity(intent);
+                        return;
+                    }
+                }
+                editor.putBoolean("isSave", false);
+                editor.commit();
+                Toast.makeText(Login.this, "Sai thông tin đăng nhập", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
