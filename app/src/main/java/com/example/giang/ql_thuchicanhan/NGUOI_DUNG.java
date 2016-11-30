@@ -22,12 +22,16 @@ class TAI_KHOAN {
     int ID_NGUOI_DUNG;
     double SO_TIEN;
     Date NGAY_TAO;
+    int LOAI_TAI_KHOAN;
+    String GHI_CHU;
 
-    public TAI_KHOAN(int ID, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO) {
+    public TAI_KHOAN(int ID, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO, int LOAI_TAI_KHOAN, String GHI_CHU) {
         this.ID = ID;
         this.ID_NGUOI_DUNG = ID_NGUOI_DUNG;
         this.SO_TIEN = SO_TIEN;
         this.NGAY_TAO = NGAY_TAO;
+        this.LOAI_TAI_KHOAN = LOAI_TAI_KHOAN;
+        this.GHI_CHU = GHI_CHU;
     }
 }
 
