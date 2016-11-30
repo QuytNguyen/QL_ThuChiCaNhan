@@ -17,6 +17,16 @@ class NGUOI_DUNG {
     }
 }
 
+class LOAI_TAI_KHOAN {
+    int ID;
+    String TEN_LOAI;
+
+    public LOAI_TAI_KHOAN(int ID, String TEN_LOAI) {
+        this.ID = ID;
+        this.TEN_LOAI = TEN_LOAI;
+    }
+}
+
 class TAI_KHOAN {
     int ID;
     int ID_NGUOI_DUNG;
