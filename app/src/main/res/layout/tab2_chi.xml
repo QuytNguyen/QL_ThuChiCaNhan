@@ -10,9 +10,9 @@
         android:background="#37c3f6"
         android:gravity="center"
         android:text="Danh sách chi"
-        android:textSize="40dp"
-        android:textStyle="italic"
-        android:textColor="#4464f4" />
+        android:textColor="#4464f4"
+        android:textSize="30dp"
+        android:textStyle="italic" />
 
     <ListView
         android:id="@+id/listchi"
