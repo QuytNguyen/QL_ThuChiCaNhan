@@ -45,6 +45,15 @@ class TAI_KHOAN {
         this.LOAI_TAI_KHOAN = LOAI_TAI_KHOAN;
         this.GHI_CHU = GHI_CHU;
     }
+
+    public TAI_KHOAN(int ID, String TEN_TAI_KHOAN) {
+        this.ID = ID;
+        this.TEN_TAI_KHOAN = TEN_TAI_KHOAN;
+    }
+
+    public TAI_KHOAN() {
+        this.TEN_TAI_KHOAN = "Hãy chọn tài khoản";
+    }
 }
 
 class LOAI_DM_CHI {
@@ -66,6 +75,11 @@ class DM_CHI {
         this.ID = ID;
         this.ID_LOAI = ID_LOAI;
         this.MUC_CHI = MUC_CHI;
+    }
+
+    public DM_CHI() {
+
+        this.MUC_CHI = "Hãy chọn mục chi";
     }
 }
 
@@ -94,6 +108,15 @@ class ND_CHI {
         this.SO_TIEN = SO_TIEN;
         this.TAI_KHOAN = TAI_KHOAN;
         this.NGAY_CHI = NGAY_CHI;
+        this.CHI_CHO = CHI_CHO;
+        this.GHI_CHU = GHI_CHU;
+    }
+
+    public ND_CHI(int ID, int ID_MUC_CHI, double SO_TIEN, int TAI_KHOAN, String CHI_CHO, String GHI_CHU) {
+        this.ID = ID;
+        this.ID_MUC_CHI = ID_MUC_CHI;
+        this.SO_TIEN = SO_TIEN;
+        this.TAI_KHOAN = TAI_KHOAN;
         this.CHI_CHO = CHI_CHO;
         this.GHI_CHU = GHI_CHU;
     }

@@ -10,52 +10,52 @@
     tools:context="com.example.giang.ql_thuchicanhan.danhmuctaikhoan">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:text="Danh mục tài khoản"
-        android:id="@+id/textView"
         android:background="#1e91d3"
-        android:textColor="#ffffff" />
+        android:text="Danh mục tài khoản"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
 
     <ListView
+        android:id="@+id/lstTaiKhoan"
         android:layout_width="wrap_content"
         android:layout_height="380dp"
-        android:id="@+id/listView"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tổng tiền:"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/listView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/lstTaiKhoan"
         android:layout_marginLeft="75dp"
         android:layout_marginStart="75dp"
+        android:text="Tổng tiền:"
         android:textColor="#f71414"
         android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/textViewKQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="kết quả"
-        android:id="@+id/textViewKQ"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
-        android:textSize="20dp"
-        android:textColor="#f71414" />
+        android:layout_toRightOf="@+id/textView4"
+        android:text="kết quả"
+        android:textColor="#f71414"
+        android:textSize="20dp" />
 
     <Button
+        android:id="@+id/buttonThemTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm"
-        android:id="@+id/buttonThemTK"
-        android:layout_below="@+id/textView4"
+        android:layout_alignEnd="@+id/textViewKQ"
         android:layout_alignRight="@+id/textViewKQ"
-        android:layout_alignEnd="@+id/textViewKQ" />
+        android:layout_below="@+id/textView4"
+        android:text="Thêm" />
 </RelativeLayout>

@@ -10,27 +10,27 @@
     tools:context="com.example.giang.ql_thuchicanhan.DanhMucMuaSam">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:text="Danh mục mưa sắm"
-        android:id="@+id/textView"
         android:background="#1e91d3"
-        android:textColor="#ffffff" />
+        android:text="Danh mục mưa sắm"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
 
     <ListView
+        android:id="@+id/lstTaiKhoan"
         android:layout_width="wrap_content"
         android:layout_height="380dp"
-        android:id="@+id/listView"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:id="@+id/buttonThemTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm"
-        android:id="@+id/buttonThemTK"
-        android:layout_below="@+id/listView"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/lstTaiKhoan"
+        android:layout_centerHorizontal="true"
+        android:text="Thêm" />
 </RelativeLayout>
