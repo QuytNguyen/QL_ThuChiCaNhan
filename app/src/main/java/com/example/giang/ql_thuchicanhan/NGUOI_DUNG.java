@@ -62,6 +62,7 @@ class LOAI_TAI_KHOAN {
 }
 
 class TAI_KHOAN {
+    ////////////////edit
     int ID;
     String TEN_TAI_KHOAN;
     int ID_NGUOI_DUNG;
