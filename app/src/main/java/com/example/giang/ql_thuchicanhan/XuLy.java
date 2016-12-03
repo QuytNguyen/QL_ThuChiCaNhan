@@ -125,4 +125,46 @@ public class XuLy {
         }
         return null;
     }
+
+
+    public static String updateData(String url, String table_name, Hashtable<String, String> data, int id) {
+        HttpClient httpClient = new DefaultHttpClient();
+
+        // URL của trang web nhận request
+        HttpPost httpPost = new HttpPost(url);
+
+        // Các tham số truyền
+        List nameValuePair;
+
+        if (table_name == "TAI_KHOAN") {
+            nameValuePair = new ArrayList(8);
+            nameValuePair.add(new BasicNameValuePair("table_name", table_name));
+            nameValuePair.add(new BasicNameValuePair("ID", id + ""));
+            nameValuePair.add(new BasicNameValuePair("TEN_TAI_KHOAN", data.get("TEN_TAI_KHOAN")));
+            nameValuePair.add(new BasicNameValuePair("ID_NGUOI_DUNG", data.get("ID_NGUOI_DUNG")));
+            nameValuePair.add(new BasicNameValuePair("SO_TIEN", data.get("SO_TIEN")));
+            nameValuePair.add(new BasicNameValuePair("NGAY_TAO", data.get("NGAY_TAO")));
+            nameValuePair.add(new BasicNameValuePair("LOAI_TAI_KHOAN", data.get("LOAI_TAI_KHOAN")));
+            nameValuePair.add(new BasicNameValuePair("GHI_CHU", data.get("GHI_CHU")));
+            //Encoding POST data
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            String kq = "";
+            try {
+                HttpResponse response = httpClient.execute(httpPost);
+                HttpEntity entity = response.getEntity();
+                kq = EntityUtils.toString(entity);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return kq;
+        }
+        return null;
+    }
 }

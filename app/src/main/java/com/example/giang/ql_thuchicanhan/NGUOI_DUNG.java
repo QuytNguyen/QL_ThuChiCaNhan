@@ -1,5 +1,13 @@
 package com.example.giang.ql_thuchicanhan;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,6 +33,32 @@ class LOAI_TAI_KHOAN {
         this.ID = ID;
         this.TEN_LOAI = TEN_LOAI;
     }
+//    public ArrayList<TAI_KHOAN> getTAI_KHOAN(Activity activity, SQLiteDatabase database, String DATABASE_NAME) {
+//        ArrayList<TAI_KHOAN> list = new ArrayList<>();
+//        database = Database.initDatabase(activity, DATABASE_NAME);
+//        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN", null);
+//        for (int i = 0; i < cursor.getCount(); i++)// cho ch?y cursor là con tro
+//        {
+//            cursor.moveToPosition(i);
+//            int ID = cursor.getInt(0);
+//            String TEN_TAI_KHOAN=cursor.getString(1);
+//            this.ID_NGUOI_DUNG = cursor.getInt(2);
+//            this.SO_TIEN = cursor.getDouble(3);
+//            String date=cursor.getString(4);
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////            String currentTime = sdf.format(date);
+//
+//            try {
+//                this.NGAY_TAO = sdf.parse(date);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            this.LOAI_TAI_KHOAN = cursor.getInt(5);
+//            this.GHI_CHU = cursor.getString(6);
+//            list.add(new TAI_KHOAN(ID,TEN_TAI_KHOAN,ID_NGUOI_DUNG,SO_TIEN,NGAY_TAO,LOAI_TAI_KHOAN,GHI_CHU));
+//        }
+//        return list;
+//    }
 }
 
 class TAI_KHOAN {
@@ -54,6 +88,64 @@ class TAI_KHOAN {
     public TAI_KHOAN() {
         this.TEN_TAI_KHOAN = "Hãy chọn tài khoản";
     }
+
+    public ArrayList<TAI_KHOAN> getTAI_KHOAN(Activity activity, SQLiteDatabase database, String DATABASE_NAME) {
+        ArrayList<TAI_KHOAN> list = new ArrayList<>();
+        database = Database.initDatabase(activity, DATABASE_NAME);
+        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN", null);
+        for (int i = 0; i < cursor.getCount(); i++)// cho ch?y cursor là con tro
+        {
+            cursor.moveToPosition(i);
+            int ID = cursor.getInt(0);
+            String TEN_TAI_KHOAN = cursor.getString(1);
+            this.ID_NGUOI_DUNG = cursor.getInt(2);
+            this.SO_TIEN = cursor.getDouble(3);
+            String date = cursor.getString(4);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String currentTime = sdf.format(date);
+
+            try {
+                this.NGAY_TAO = sdf.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            this.LOAI_TAI_KHOAN = cursor.getInt(5);
+            this.GHI_CHU = cursor.getString(6);
+            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
+        }
+        return list;
+    }
+
+    public void insertTAI_KHOAN(Activity activity, String DATABASE_NAME, TAI_KHOAN tk) {
+        SQLiteDatabase database = Database.initDatabase(activity, DATABASE_NAME);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("TEN_TAI_KHOAN", tk.TEN_TAI_KHOAN);
+        contentValues.put("ID_NGUOI_DUNG", tk.ID_NGUOI_DUNG);
+        contentValues.put("SO_TIEN", tk.SO_TIEN);
+        contentValues.put("NGAY_TAO", tk.NGAY_TAO.toString());
+        contentValues.put("LOAI_TAI_KHOAN", tk.LOAI_TAI_KHOAN);
+        contentValues.put("GHI_CHU", tk.GHI_CHU);
+        database.insert("TaiKhoan", null, contentValues);
+    }
+//    public ArrayList<String> getListTenPB(ArrayList<PhongBan> lstPB)
+//    {
+//        ArrayList<String> lstTenPB= new ArrayList<>();
+//        for (int i=0; i<lstPB.size(); i++)
+//        {
+//            lstTenPB.add(lstPB.get(i).getTenPB());
+//        }
+//        return lstTenPB;
+//    }
+//    public ArrayList<String> getListMaPB(ArrayList<PhongBan> lstPB)
+//    {
+//        ArrayList<String> lstTenPB= new ArrayList<>();
+//        for (int i=0; i<lstPB.size(); i++)
+//        {
+//            lstTenPB.add(lstPB.get(i).getMaPB());
+//        }
+//        return lstTenPB;
+//    }
+
 }
 
 class LOAI_DM_CHI {

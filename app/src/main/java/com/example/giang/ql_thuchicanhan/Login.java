@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
+    public static int idUser = 0;
     public ArrayList<NGUOI_DUNG> list = new ArrayList<>();
     Button btnLogin;
     EditText edtName, edtPass;
@@ -30,7 +31,7 @@ public class Login extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new getNGUOI_DUNG().execute("https://nguyenquyt95.000webhostapp.com/json.php");
+                new getNGUOI_DUNG().execute("http://huficlass.com/json.php");
             }
         });
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -43,7 +44,9 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 for (int i = 0; i < list.size(); i++) {
                     if (edtName.getText().toString().equals(list.get(i).USER) && edtPass.getText().toString().equals(list.get(i).PASS)) {
+                        idUser = list.get(i).ID;
                         editor.putBoolean("isSave", true);
+                        editor.putInt("idUser", idUser);
                         editor.commit();
                         Intent intent = new Intent(Login.this, Main.class);
                         startActivity(intent);
@@ -59,6 +62,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         boolean Save = sharedPreferences.getBoolean("isSave", false);
         if (Save) {
+            idUser = sharedPreferences.getInt("idUser", 0);
             Intent intent = new Intent(Login.this, Main.class);
             startActivity(intent);
         } else {
@@ -66,7 +70,9 @@ public class Login extends AppCompatActivity {
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
                     if (edtName.getText().toString().equals(list.get(i).USER) && edtPass.getText().toString().equals(list.get(i).PASS)) {
+                        idUser = list.get(i).ID;
                         editor.putBoolean("isSave", true);
+                        editor.putInt("idUser", idUser);
                         editor.commit();
                         Intent intent = new Intent(Login.this, Main.class);
                         startActivity(intent);
