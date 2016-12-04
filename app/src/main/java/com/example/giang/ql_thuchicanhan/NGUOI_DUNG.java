@@ -62,8 +62,9 @@ class TAI_KHOAN implements Serializable {
     Date NGAY_TAO;
     int LOAI_TAI_KHOAN;
     String GHI_CHU;
+    int ofUser;
 
-    public TAI_KHOAN(int ID, String TEN_TAI_KHOAN, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO, int LOAI_TAI_KHOAN, String GHI_CHU) {
+    public TAI_KHOAN(int ID, String TEN_TAI_KHOAN, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO, int LOAI_TAI_KHOAN, String GHI_CHU, int ofUser) {
         this.ID = ID;
         this.TEN_TAI_KHOAN = TEN_TAI_KHOAN;
         this.ID_NGUOI_DUNG = ID_NGUOI_DUNG;
@@ -71,6 +72,7 @@ class TAI_KHOAN implements Serializable {
         this.NGAY_TAO = NGAY_TAO;
         this.LOAI_TAI_KHOAN = LOAI_TAI_KHOAN;
         this.GHI_CHU = GHI_CHU;
+        this.ofUser = ofUser;
     }
 
     public TAI_KHOAN(int ID, String TEN_TAI_KHOAN) {
@@ -84,7 +86,8 @@ class TAI_KHOAN implements Serializable {
     public ArrayList<TAI_KHOAN> getTAI_KHOAN(Activity activity, SQLiteDatabase database, String DATABASE_NAME) {
         ArrayList<TAI_KHOAN> list = new ArrayList<>();
         database = Database.initDatabase(activity, DATABASE_NAME);
-        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN", null);
+        String idUser = Login.idUser + "";
+        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN where ofUser = ?", new String[]{idUser});
         for (int i = 0; i < cursor.getCount(); i++)// cho ch?y cursor là con tro
         {
             cursor.moveToPosition(i);
@@ -103,7 +106,8 @@ class TAI_KHOAN implements Serializable {
             }
             this.LOAI_TAI_KHOAN = cursor.getInt(5);
             this.GHI_CHU = cursor.getString(6);
-            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
+            this.ofUser = Integer.parseInt(cursor.getString(7));
+            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
         }
         return list;
     }
@@ -117,6 +121,7 @@ class TAI_KHOAN implements Serializable {
         contentValues.put("NGAY_TAO", tk.NGAY_TAO.toString());
         contentValues.put("LOAI_TAI_KHOAN", tk.LOAI_TAI_KHOAN);
         contentValues.put("GHI_CHU", tk.GHI_CHU);
+        contentValues.put("ofUser", Login.idUser);
         database.insert("TAI_KHOAN", null, contentValues);
     }
 
@@ -169,26 +174,26 @@ class DM_CHI {
     int ID;
     int ID_LOAI;
     String MUC_CHI;
+    int ofUser;
 
-    public DM_CHI(int ID, int ID_LOAI, String MUC_CHI) {
+    public DM_CHI(int ID, int ID_LOAI, String MUC_CHI, int ofUser) {
         this.ID = ID;
         this.ID_LOAI = ID_LOAI;
         this.MUC_CHI = MUC_CHI;
-    }
-
-    public DM_CHI() {
-
-        this.MUC_CHI = "Hãy chọn mục chi";
+        this.ofUser = ofUser;
     }
 }
 
 class DM_THU {
     int ID;
     String MUC_THU;
+    int ofUser;
 
-    public DM_THU(int ID, String MUC_THU) {
+
+    public DM_THU(int ID, String MUC_THU, int ofUser) {
         this.ID = ID;
         this.MUC_THU = MUC_THU;
+        this.ofUser = ofUser;
     }
 }
 

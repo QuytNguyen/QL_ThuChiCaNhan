@@ -279,13 +279,15 @@ public class chi extends AppCompatActivity {
         int ID;
         int ID_LOAI;
         String MUC_CHI;
+        int ofUser;
         for (int i = 0; i < cursor.getCount(); i++)// cho chạy cursor là con tro
         {
             cursor.moveToPosition(i);
             ID = cursor.getInt(0);
             ID_LOAI = cursor.getInt(2);
             MUC_CHI = cursor.getString(1);
-            listdm.add(new DM_CHI(ID, ID_LOAI, MUC_CHI));
+            ofUser = cursor.getInt(3);
+            listdm.add(new DM_CHI(ID, ID_LOAI, MUC_CHI, ofUser));
         }
         adapterDMCHI.notifyDataSetChanged();
     }
@@ -313,7 +315,8 @@ public class chi extends AppCompatActivity {
             }
             int LOAI_TAI_KHOAN = cursor.getInt(5);
             String GHI_CHU = cursor.getString(6);
-            listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
+            int ofUser = cursor.getInt(7);
+            listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
         }
         adapterSpinnerTaiKhoan.notifyDataSetChanged();
     }

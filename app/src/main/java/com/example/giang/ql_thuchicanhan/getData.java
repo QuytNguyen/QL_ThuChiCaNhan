@@ -78,6 +78,7 @@ public class getData extends AsyncTask<String, Integer, String> {
             Date NGAY_TAO;
             int LOAI_TAI_KHOAN;
             String GHI_CHU;
+            int ofUser;
 
             JSONArray arr = new JSONArray(s);
             for (int i = 0; i < arr.length(); i++) {
@@ -89,8 +90,9 @@ public class getData extends AsyncTask<String, Integer, String> {
                 NGAY_TAO = new Date(2016, 1, 1);//json_object.getString("NGAY_TAO");
                 LOAI_TAI_KHOAN = json_object.getInt("LOAI_TAI_KHOAN");
                 GHI_CHU = json_object.getString("GHI_CHU");
+                ofUser = json_object.getInt("ofUser");
 
-                list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
+                list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
             }
         } catch (JSONException e) {
         }
