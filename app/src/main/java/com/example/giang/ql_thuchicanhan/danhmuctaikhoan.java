@@ -80,18 +80,9 @@ public class danhmuctaikhoan extends AppCompatActivity {
                 return false;
             }
         });
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                new getTaiKhoan().execute("http://huficlass.com/json.php");
-//            }
-//        })
     }
 
     public void editTaiKhoan(View v) {
-//        RelativeLayout rl = (RelativeLayout)v.getParent();
-//        TextView tv = (TextView)rl.findViewById(R.id.label);
-//        String text = tv.getText().toString();
         ImageButton btn = (ImageButton) v;
         Bundle bundle = new Bundle();
         TAI_KHOAN tk = list.get((int) btn.getTag());
@@ -104,44 +95,4 @@ public class danhmuctaikhoan extends AppCompatActivity {
     }
 
 
-//    public class getTaiKhoan extends AsyncTask<String, Integer, String> {
-//        @Override
-//        protected String doInBackground(String... strings) {
-//
-//            return XuLy.displayDataFromTable(strings[0], "TAI_KHOAN");
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            ArrayList<TAI_KHOAN> list = new ArrayList<>();
-//            try {
-//                int ID;
-//                String TEN_TAI_KHOAN;
-//                int ID_NGUOI_DUNG;
-//                double SO_TIEN;
-//                Date NGAY_TAO;
-//                int LOAI_TAI_KHOAN;
-//                String GHI_CHU;
-//
-//                JSONArray arr = new JSONArray(s);
-//                for (int i = 0; i < arr.length(); i++) {
-//                    JSONObject json_object = arr.getJSONObject(i);
-//                    ID = json_object.getInt("ID");
-//                    TEN_TAI_KHOAN = json_object.getString("TEN_TAI_KHOAN");
-//                    ID_NGUOI_DUNG = json_object.getInt("ID_NGUOI_DUNG");
-//                    SO_TIEN = json_object.getInt("SO_TIEN");
-//                    NGAY_TAO = new Date(2016, 1, 1);//json_object.getString("NGAY_TAO");
-//                    LOAI_TAI_KHOAN = json_object.getInt("LOAI_TAI_KHOAN");
-//                    GHI_CHU = json_object.getString("GHI_CHU");
-//
-//                    list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
-//                }
-//            } catch (JSONException e) {
-//            }
-//
-//            TaiKhoanAdapter myAdapter = new TaiKhoanAdapter(danhmuctaikhoan.this, list);
-//            lstTaiKhoan.setAdapter(myAdapter);
-//        }
-//
-//    }
 }

@@ -6,83 +6,71 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.giang.ql_thuchicanhan.them_hangmucchi">
+    android:paddingTop="@dimen/activity_vertical_margin">
+
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:text="Thêm hạng mục chi"
-        android:id="@+id/textView12"
-        android:background="#1e91d3"
-        android:textColor="#ffffff"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tên hạng mục chi"
         android:id="@+id/textView13"
-        android:textSize="20dp"
-        android:textColor="#070505"
-        android:layout_below="@+id/textView12"
-        android:layout_alignParentRight="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="49dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:text="Tên hạng mục chi"
+        android:textColor="#070505"
+        android:textSize="20dp" />
 
     <EditText
+        android:id="@+id/editTextHangMucChi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextHangMucChi"
-        android:layout_below="@+id/textView13"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView13"
+        android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/textView14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thuộc hạng mục"
-        android:id="@+id/textView14"
-        android:textSize="20dp"
-        android:textColor="#070505"
-        android:layout_below="@+id/editTextHangMucChi"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        android:layout_below="@+id/editTextHangMucChi"
+        android:layout_marginTop="40dp"
+        android:text="Thuộc hạng mục"
+        android:textColor="#070505"
+        android:textSize="20dp" />
 
     <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
         android:id="@+id/spinnerHangMucChi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView14"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="10dp" />
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lưu"
-        android:id="@+id/buttonLuuHMC"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="61dp" />
+        android:layout_below="@+id/spinnerHangMucChi"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hủy"
-        android:id="@+id/buttonHuyHMC"
-        android:layout_alignTop="@+id/buttonLuuHMC"
-        android:layout_alignRight="@+id/spinnerHangMucChi"
-        android:layout_alignEnd="@+id/spinnerHangMucChi"
-        android:layout_marginRight="47dp"
-        android:layout_marginEnd="47dp" />
+        <Button
+            android:id="@+id/buttonLuuHMC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu" />
+
+        <Button
+            android:id="@+id/buttonHuyHMC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy" />
+    </LinearLayout>
+
+
 </RelativeLayout>

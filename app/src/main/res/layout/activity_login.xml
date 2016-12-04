@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="LOGIN TEST APP"
+        android:text="ĐĂNG NHẬP"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:layout_marginTop="27dp"
-        android:text="Username" />
+        android:text="Tên đăng nhập" />
 
     <TextView
         android:id="@+id/textView3"
@@ -37,10 +37,10 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="33dp"
-        android:text="Password" />
+        android:text="Mật khẩu" />
 
     <EditText
-        android:id="@+id/edtName"
+        android:id="@+id/edtNameDK"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView"
@@ -48,20 +48,30 @@
         android:layout_alignTop="@+id/textView2" />
 
     <EditText
-        android:id="@+id/edtPass"
+        android:id="@+id/edtPassDK"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edtName"
-        android:layout_alignStart="@+id/edtName"
+        android:layout_alignLeft="@+id/edtNameDK"
+        android:layout_alignStart="@+id/edtNameDK"
         android:layout_alignTop="@+id/textView3"
         android:ems="10"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnDangKy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/tvDKTK"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDangKy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:clickable="true"
+        android:text="Bạn chưa có tài khoản?" />
 </RelativeLayout>
