@@ -1,5 +1,6 @@
 package com.example.giang.ql_thuchicanhan;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class themtaikhoan extends AppCompatActivity {
     EditText edtTen, edtGhiChu, edtSoTien;
     Spinner spinner;
     ArrayList<LOAI_TAI_KHOAN> list;
+    TAI_KHOAN i = new TAI_KHOAN();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +51,28 @@ public class themtaikhoan extends AppCompatActivity {
         edtGhiChu = (EditText) findViewById(R.id.edtGhiChu);
         edtSoTien = (EditText) findViewById(R.id.edtSoTien);
         spinner = (Spinner) findViewById(R.id.spinnerLoai);
+        LOAI_TAI_KHOAN loai = new LOAI_TAI_KHOAN();
+        list = loai.getLOAI_TAI_KHOAN(themtaikhoan.this, database, DATABASE_NAME);
+        final ArrayList<String> tenLoai = new ArrayList<>();
+        ArrayList<Integer> listID = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            tenLoai.add(list.get(i).TEN_LOAI);
+            listID.add(list.get(i).ID);
+        }
+        ArrayAdapter myAdapter = new ArrayAdapter<>(themtaikhoan.this, android.R.layout.simple_spinner_item, tenLoai);
+        spinner.setAdapter(myAdapter);
 
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("data");
+        i = (TAI_KHOAN) bundle.getSerializable("item");
+        if (i != null)//load dữ liệu sửa
+        {
+            edtTen.setText(i.TEN_TAI_KHOAN);
+            spinner.setSelection(listID.indexOf(i.ID));//spinner
+            edtSoTien.setText(i.SO_TIEN + "");
+            edtGhiChu.setText(i.GHI_CHU);
+        }
         btnLuuTK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +85,14 @@ public class themtaikhoan extends AppCompatActivity {
                 String TEN_TAI_KHOAN = edtTen.getText().toString();
                 int ID_NGUOI_DUNG = Login.idUser;
                 double SO_TIEN = Double.parseDouble(edtSoTien.getText().toString());
-
                 Date dt = Calendar.getInstance().getTime();
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date currentTime=new Date();
+//                try {
+//                    currentTime=sdf.parse(dt.toString());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            String currentTime = sdf.format(dt);
 //                try {
@@ -76,9 +104,21 @@ public class themtaikhoan extends AppCompatActivity {
                 LOAI_TAI_KHOAN loaiTaiKhoan = list.get(spinner.getSelectedItemPosition());
                 int LOAI_TAI_KHOAN = loaiTaiKhoan.ID;
                 String GHI_CHU = edtGhiChu.getText().toString();
-                TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU);
-                tk.insertTAI_KHOAN(themtaikhoan.this, DATABASE_NAME, tk);
+                if (i == null) {
+                    TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU);
+                    tk.insertTAI_KHOAN(themtaikhoan.this, DATABASE_NAME, tk);
+                } else {
+                    i.TEN_TAI_KHOAN = TEN_TAI_KHOAN;
+                    i.SO_TIEN = SO_TIEN;
+                    i.LOAI_TAI_KHOAN = LOAI_TAI_KHOAN;
+                    i.GHI_CHU = GHI_CHU;
+                    i.updateTAI_KHOAN(themtaikhoan.this, DATABASE_NAME, i);
+                }
+                finish();
+                Intent intent = new Intent(themtaikhoan.this, danhmuctaikhoan.class);
+                startActivity(intent);
             }
+
         });
         btnHuyTK.setOnClickListener(new View.OnClickListener() {
             @Override
