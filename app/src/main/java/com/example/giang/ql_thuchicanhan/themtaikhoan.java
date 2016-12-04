@@ -105,7 +105,7 @@ public class themtaikhoan extends AppCompatActivity {
                 int LOAI_TAI_KHOAN = loaiTaiKhoan.ID;
                 String GHI_CHU = edtGhiChu.getText().toString();
                 if (i == null) {
-                    TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU);
+                    TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU, Login.idUser);
                     tk.insertTAI_KHOAN(themtaikhoan.this, DATABASE_NAME, tk);
                 } else {
                     i.TEN_TAI_KHOAN = TEN_TAI_KHOAN;

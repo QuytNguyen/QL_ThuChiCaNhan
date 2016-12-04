@@ -84,13 +84,15 @@ public class AllHangMuc extends AppCompatActivity {
                 int ID;
                 int ID_LOAI;
                 String MUC_CHI;
+                int ofUser;
                 for (int j = 0; j < cursor.getCount(); j++)// cho chạy cursor là con tro
                 {
                     cursor.moveToPosition(j);
                     ID = cursor.getInt(0);
                     ID_LOAI = cursor.getInt(2);
                     MUC_CHI = cursor.getString(1);
-                    lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI));
+                    ofUser = Integer.parseInt(cursor.getString(3));
+                    lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI, ofUser));
                     lst.add(MUC_CHI);
                 }
                 arrayAdapter.notifyDataSetChanged();
@@ -384,13 +386,15 @@ public class AllHangMuc extends AppCompatActivity {
         int ID;
         int ID_LOAI;
         String MUC_CHI;
+        int ofUser;
         for (int i = 0; i < cursor.getCount(); i++)// cho chạy cursor là con tro
         {
             cursor.moveToPosition(i);
             ID = cursor.getInt(0);
             ID_LOAI = cursor.getInt(2);
             MUC_CHI = cursor.getString(1);
-            lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI));
+            ofUser = cursor.getInt(3);
+            lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI, ofUser));
             lst.add(MUC_CHI);
         }
         arrayAdapter.notifyDataSetChanged();
@@ -421,12 +425,14 @@ public class AllHangMuc extends AppCompatActivity {
         lstDMT.clear();
         int ID;
         String MUC_THU;
+        int ofUser;
         for (int i = 0; i < cursor.getCount(); i++)// cho chạy cursor là con tro
         {
             cursor.moveToPosition(i);
             ID = cursor.getInt(0);
             MUC_THU = cursor.getString(1);
-            lstdmt.add(new DM_THU(ID, MUC_THU));
+            ofUser = cursor.getInt(2);
+            lstdmt.add(new DM_THU(ID, MUC_THU, ofUser));
             lstDMT.add(MUC_THU);
         }
         arrayAdapterDMT.notifyDataSetChanged();
