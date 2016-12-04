@@ -24,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="380dp"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:focusable="false" />
 
     <TextView
         android:id="@+id/textView4"

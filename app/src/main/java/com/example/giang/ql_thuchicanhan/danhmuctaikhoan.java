@@ -1,13 +1,20 @@
 package com.example.giang.ql_thuchicanhan;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +29,7 @@ public class danhmuctaikhoan extends AppCompatActivity {
     SQLiteDatabase database;
     Button btnThemTk;
     ListView lstTaiKhoan;
-
+    ArrayList<TAI_KHOAN> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,66 +39,60 @@ public class danhmuctaikhoan extends AppCompatActivity {
         btnThemTk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                TAI_KHOAN tk = null;
+                bundle.putSerializable("item", tk);
+                finish();
                 Intent intent = new Intent(danhmuctaikhoan.this, themtaikhoan.class);
+                intent.putExtra("data", bundle);
                 startActivity(intent);
             }
         });
         lstTaiKhoan = (ListView) findViewById(R.id.lstTaiKhoan);
         TAI_KHOAN tk = new TAI_KHOAN();
-        ArrayList<TAI_KHOAN> list = tk.getTAI_KHOAN(danhmuctaikhoan.this, database, DATABASE_NAME);
-        TaiKhoanAdapter myAdapter = new TaiKhoanAdapter(danhmuctaikhoan.this, list);
+        list = tk.getTAI_KHOAN(danhmuctaikhoan.this, database, DATABASE_NAME);
+        final TaiKhoanAdapter myAdapter = new TaiKhoanAdapter(danhmuctaikhoan.this, list);
         lstTaiKhoan.setAdapter(myAdapter);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                new getTaiKhoan().execute("http://huficlass.com/json.php");
-//            }
-//        });
+        lstTaiKhoan.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int idrow = i;
+                AlertDialog.Builder builder = new AlertDialog.Builder(danhmuctaikhoan.this);
+                builder.setTitle("Xóa tài khoản này?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //TODO
+                        TAI_KHOAN tk = new TAI_KHOAN();
+                        tk.deleteTAI_KHOAN(danhmuctaikhoan.this, DATABASE_NAME, list.get(idrow));
+                        list.remove(idrow);
+                        myAdapter.notifyDataSetChanged();//((BaseAdapter) lstTaiKhoan.getAdapter()).notifyDataSetChanged(); //
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //TODO
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return false;
+            }
+        });
     }
 
     public void editTaiKhoan(View v) {
+        ImageButton btn = (ImageButton) v;
+        Bundle bundle = new Bundle();
+        TAI_KHOAN tk = list.get((int) btn.getTag());
+        bundle.putSerializable("item", tk);
+
+        finish();
         Intent intent = new Intent(danhmuctaikhoan.this, themtaikhoan.class);
+        intent.putExtra("data", bundle);
         startActivity(intent);
     }
 
-//    public class getTaiKhoan extends AsyncTask<String, Integer, String> {
-//        @Override
-//        protected String doInBackground(String... strings) {
-//
-//            return XuLy.displayDataFromTable(strings[0], "TAI_KHOAN");
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            ArrayList<TAI_KHOAN> list = new ArrayList<>();
-//            try {
-//                int ID;
-//                String TEN_TAI_KHOAN;
-//                int ID_NGUOI_DUNG;
-//                double SO_TIEN;
-//                Date NGAY_TAO;
-//                int LOAI_TAI_KHOAN;
-//                String GHI_CHU;
-//
-//                JSONArray arr = new JSONArray(s);
-//                for (int i = 0; i < arr.length(); i++) {
-//                    JSONObject json_object = arr.getJSONObject(i);
-//                    ID = json_object.getInt("ID");
-//                    TEN_TAI_KHOAN = json_object.getString("TEN_TAI_KHOAN");
-//                    ID_NGUOI_DUNG = json_object.getInt("ID_NGUOI_DUNG");
-//                    SO_TIEN = json_object.getInt("SO_TIEN");
-//                    NGAY_TAO = new Date(2016, 1, 1);//json_object.getString("NGAY_TAO");
-//                    LOAI_TAI_KHOAN = json_object.getInt("LOAI_TAI_KHOAN");
-//                    GHI_CHU = json_object.getString("GHI_CHU");
-//
-//                    list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
-//                }
-//            } catch (JSONException e) {
-//            }
-//
-//            TaiKhoanAdapter myAdapter = new TaiKhoanAdapter(danhmuctaikhoan.this, list);
-//            lstTaiKhoan.setAdapter(myAdapter);
-//        }
-//
-//    }
+
 }
