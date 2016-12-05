@@ -86,13 +86,6 @@ public class themtaikhoan extends AppCompatActivity {
                 int ID_NGUOI_DUNG = Login.idUser;
                 double SO_TIEN = Double.parseDouble(edtSoTien.getText().toString());
                 Date dt = Calendar.getInstance().getTime();
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                String currentTime = sdf.format(dt);
-//                try {
-//                    Date NGAY_TAO=sdf.parse(currentTime);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
 
                 LOAI_TAI_KHOAN loaiTaiKhoan = list.get(spinner.getSelectedItemPosition());
                 int LOAI_TAI_KHOAN = loaiTaiKhoan.ID;

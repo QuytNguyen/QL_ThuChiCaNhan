@@ -23,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +71,7 @@ public class chi extends AppCompatActivity {
         txtChiCho = (EditText) findViewById(R.id.editText4);
         txtGhiChu = (EditText) findViewById(R.id.editText5);
         txtSoTien.setText("0");
+        getDefaultInforkc(txtNgayChi);
         spinnerTK = (Spinner) findViewById(R.id.spinnerTaiKhoanChi);
         loadTab();
         adapterDMCHI = new AdapterSpinnerKhoanChi(listdm, this);
@@ -89,8 +89,8 @@ public class chi extends AppCompatActivity {
         btnCHon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDefaultInforkc();
-                showDatePickerDialogkc();
+
+                showDatePickerDialogkc(txtNgayChi);
             }
         });
         btnThem.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +100,7 @@ public class chi extends AppCompatActivity {
                 Readdata();
             }
         });
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -141,6 +142,7 @@ public class chi extends AppCompatActivity {
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
     }
+
 
     public void editChi(View v) {
         Button btn = (Button) v;
@@ -217,24 +219,24 @@ public class chi extends AppCompatActivity {
         dialog.show();
     }
 
-    public void getDefaultInforkc() {
+    public void getDefaultInforkc(EditText txtNgay) {
         cal = Calendar.getInstance();
         SimpleDateFormat dft = null;
         dft = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String strDate = dft.format(cal.getTime());
-        txtNgayChi.setText(strDate);
+        txtNgay.setText(strDate);
         dateFinish = cal.getTime();
     }
 
-    public void showDatePickerDialogkc() {
+    public void showDatePickerDialogkc(final EditText txtNgay) {
         DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                txtNgayChi.setText((dayOfMonth) + "/" + (monthOfYear + 1) + "/" + year);
+                txtNgay.setText((dayOfMonth) + "/" + (monthOfYear + 1) + "/" + year);
                 cal.set(year, monthOfYear, dayOfMonth);
                 dateFinish = cal.getTime();
             }
         };
-        String s1 = txtNgayChi.getText() + "";
+        String s1 = txtNgay.getText() + "";
         String strArrtmp1[] = s1.split("/");
         int ngayv = Integer.parseInt(strArrtmp1[0]);
         int thangv = Integer.parseInt(strArrtmp1[1]) - 1;
@@ -306,14 +308,7 @@ public class chi extends AppCompatActivity {
             int ID_NGUOI_DUNG = cursor.getInt(2);
             double SO_TIEN = cursor.getDouble(3);
             String date = cursor.getString(4);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String currentTime = sdf.format(date);
-            Date NGAY_TAO = new Date(System.currentTimeMillis());
-            try {
-                NGAY_TAO = sdf.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            Date NGAY_TAO = new Date(date);
             int LOAI_TAI_KHOAN = cursor.getInt(5);
             String GHI_CHU = cursor.getString(6);
             listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));

@@ -74,12 +74,12 @@ public class Thu extends AppCompatActivity {
         loadDM_THU();
         loadTAI_KHOAN();
         loadND_THU();
-
+        getDefaultInforkc(txtNgayThu);
         btnCHon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDefaultInforkt();
-                showDatePickerDialogkt();
+
+                showDatePickerDialogkc(txtNgayThu);
             }
         });
 
@@ -97,7 +97,7 @@ public class Thu extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int idrow = i;
                 AlertDialog.Builder builder = new AlertDialog.Builder(Thu.this);
-                builder.setTitle("Xóa tài khoản này?");
+                builder.setTitle("Xóa mục thu này?");
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //TODO
@@ -163,24 +163,24 @@ public class Thu extends AppCompatActivity {
         tabHost.addTab(spec2);
     }
 
-    public void getDefaultInforkt() {
+    public void getDefaultInforkc(EditText txtNgay) {
         cal = Calendar.getInstance();
         SimpleDateFormat dft = null;
         dft = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String strDate = dft.format(cal.getTime());
-        txtNgayThu.setText(strDate);
+        txtNgay.setText(strDate);
         dateFinish = cal.getTime();
     }
 
-    public void showDatePickerDialogkt() {
+    public void showDatePickerDialogkc(final EditText txtNgay) {
         DatePickerDialog.OnDateSetListener callback = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                txtNgayThu.setText((dayOfMonth) + "/" + (monthOfYear + 1) + "/" + year);
+                txtNgay.setText((dayOfMonth) + "/" + (monthOfYear + 1) + "/" + year);
                 cal.set(year, monthOfYear, dayOfMonth);
                 dateFinish = cal.getTime();
             }
         };
-        String s1 = txtNgayThu.getText() + "";
+        String s1 = txtNgay.getText() + "";
         String strArrtmp1[] = s1.split("/");
         int ngayv = Integer.parseInt(strArrtmp1[0]);
         int thangv = Integer.parseInt(strArrtmp1[1]) - 1;
@@ -199,7 +199,7 @@ public class Thu extends AppCompatActivity {
         double SO_TIEN;
         Date NGAY_THU = new Date(System.currentTimeMillis());
         String GHI_CHU;
-        for (int i = 0; i < cursor.getCount(); i++) {
+        for (int i = listndt.size(); i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
             ID = cursor.getInt(0);
             ID_MUC_THU = cursor.getInt(1);
@@ -318,8 +318,6 @@ public class Thu extends AppCompatActivity {
                     contentValues.put("NGAY_THU", NGAY_THU.toString());
                     contentValues.put("GHI_CHU", GHI_CHU);
                     database.update("ND_THU", contentValues, "ID = ?", new String[]{ID + ""});
-
-                    listndt.add(new ND_THU(ID, ID_MUC_THU, SO_TIEN, ID_TAI_KHOAN, NGAY_THU, GHI_CHU));
                     adapterThu.notifyDataSetChanged();
                     Toast.makeText(Thu.this, "Sửa thành công!!!", Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {
@@ -332,16 +330,16 @@ public class Thu extends AppCompatActivity {
         btnhuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                dialog.dismiss();
             }
         });
-//        btnCHon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getDefaultInforkc();
-//                showDatePickerDialogkc();
-//            }
-//        });
+        btnCHons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showDatePickerDialogkc(txtNgayThu);
+            }
+        });
         dialog.show();
     }
 

@@ -55,23 +55,13 @@
         android:id="@+id/imageViewItemThu"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/btnEditChi"
+        android:layout_alignBottom="@+id/textViewItemTentaiKhoanChi"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp" />
 
-    <Button
-        android:id="@+id/btnEditChi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView21"
-        android:onClick="editChi"
-        android:text="Sửa" />
-
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/textViewItemTentaiKhoanChi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btnEditChi"
@@ -81,4 +71,12 @@
         android:text="New Text"
         android:textColor="#b2acac"
         android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/btnEditChi"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewTenKhoanChiItem" />
 </RelativeLayout>

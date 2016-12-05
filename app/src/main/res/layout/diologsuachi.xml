@@ -98,8 +98,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText5"
-        android:layout_marginLeft="70dp"
-        android:text="Thêm" />
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_toEndOf="@+id/textView27"
+        android:layout_toRightOf="@+id/textView27"
+        android:text="Lưu" />
 
     <Button
         android:id="@+id/buttonhuy"

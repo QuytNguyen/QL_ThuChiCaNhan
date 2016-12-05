@@ -109,7 +109,7 @@
         android:layout_alignTop="@+id/btnhuy"
         android:layout_toLeftOf="@+id/btnhuy"
         android:layout_toStartOf="@+id/btnhuy"
-        android:text="Thêm" />
+        android:text="Lưu" />
 
     <Button
         android:id="@+id/btnhuy"

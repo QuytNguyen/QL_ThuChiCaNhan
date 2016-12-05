@@ -61,16 +61,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp" />
 
-    <Button
-        android:id="@+id/btnSuaThu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView21"
-        android:onClick="editNDThu"
-        android:text="Sửa" />
-
     <TextView
         android:id="@+id/textViewItemTentaiKhoanThu"
         android:layout_width="wrap_content"
@@ -81,4 +71,12 @@
         android:text="New Text"
         android:textColor="#b2acac"
         android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/btnSuaThu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/textView21"
+        android:layout_alignRight="@+id/textView21"
+        android:layout_below="@+id/textViewTenKhoanThuItem" />
 </RelativeLayout>
