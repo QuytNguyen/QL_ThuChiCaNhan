@@ -154,7 +154,6 @@ public class Login extends AppCompatActivity {
                 Date NGAY_TAO;
                 int LOAI_TAI_KHOAN;
                 String GHI_CHU;
-                int ofUser;
 
                 JSONArray arr = new JSONArray(s);
                 for (int i = 0; i < arr.length(); i++) {
@@ -166,8 +165,7 @@ public class Login extends AppCompatActivity {
                     NGAY_TAO = new Date(2016, 1, 1);//json_object.getString("NGAY_TAO");
                     LOAI_TAI_KHOAN = json_object.getInt("LOAI_TAI_KHOAN");
                     GHI_CHU = json_object.getString("GHI_CHU");
-                    ofUser = json_object.getInt("ofUser");
-                    list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
+                    list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
                 }
             } catch (JSONException e) {
             }

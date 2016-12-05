@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewTKT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Tên khoản thu"
+        android:textColor="#0b1625"
+        android:textSize="15dp" />
+
+    <Spinner
+        android:id="@+id/spTenKT"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewTKT"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textViewST"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spTenKT"
+        android:text="Số tiền thu"
+        android:textColor="#0b1625"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editST"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewST"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="15dp" />
+
+
+    <TextView
+        android:id="@+id/textViewNT"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editST"
+        android:layout_marginTop="10dp"
+        android:text="Ngày thu"
+        android:textColor="#0b1625"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editNT"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewNT"
+        android:layout_toLeftOf="@+id/buttonDataNT"
+        android:layout_toStartOf="@+id/buttonDataNT"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/textViewGC"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editNT"
+        android:layout_marginTop="10dp"
+        android:text="Ghi chú"
+        android:textColor="#0b1625"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editGC"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewGC"
+        android:ems="10"
+        android:inputType="date|text"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/buttonDataNT"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewNT"
+        android:text="Chọn" />
+
+
+    <Button
+        android:id="@+id/buttonThem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnhuy"
+        android:layout_toLeftOf="@+id/btnhuy"
+        android:layout_toStartOf="@+id/btnhuy"
+        android:text="Thêm" />
+
+    <Button
+        android:id="@+id/btnhuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner2"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginTop="45dp"
+        android:layout_toLeftOf="@+id/buttonDataNT"
+        android:layout_toStartOf="@+id/buttonDataNT"
+        android:text="Hủy" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editGC"
+        android:text="Vào tài khoản"
+        android:textColor="#0b1625"
+        android:textSize="15dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView29"
+        android:textSize="30dp" />
+
+
+    android:textSize="15dp" />
+</RelativeLayout>

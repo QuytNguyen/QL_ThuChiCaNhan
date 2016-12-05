@@ -77,25 +77,12 @@ public class AllHangMuc extends AppCompatActivity {
         spinnerChi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                database = Database.initDatabase(AllHangMuc.this, DATABASE_NAME);
-                Cursor cursor = database.rawQuery("SELECT * FROM DM_CHI WHERE ID_LOAI = ?", new String[]{lstldm.get(i).ID + ""});
-                lstdmc.clear();
-                lst.clear();
-                int ID;
-                int ID_LOAI;
-                String MUC_CHI;
-                int ofUser;
-                for (int j = 0; j < cursor.getCount(); j++)// cho chạy cursor là con tro
+
+                if (i == 0)
                 {
-                    cursor.moveToPosition(j);
-                    ID = cursor.getInt(0);
-                    ID_LOAI = cursor.getInt(2);
-                    MUC_CHI = cursor.getString(1);
-                    ofUser = Integer.parseInt(cursor.getString(3));
-                    lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI, ofUser));
-                    lst.add(MUC_CHI);
-                }
-                arrayAdapter.notifyDataSetChanged();
+                    ReaddataDM_CHI();
+                } else
+                    setSpinnerChi(i);
             }
 
             @Override
@@ -148,7 +135,7 @@ public class AllHangMuc extends AppCompatActivity {
                     public void onClick(View view) {
                         //////////////////////////////////sửa Mục chi/////////////////////////
                         try {
-                            int ID_LOAI = spinnerThemMUCCHis.getSelectedItemPosition() + 1;
+                            int ID_LOAI = spinnerThemMUCCHis.getSelectedItemPosition();
                             String MUC_CHI = txtMucChis.getText().toString();
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("ID_LOAI", ID_LOAI);
@@ -190,11 +177,13 @@ public class AllHangMuc extends AppCompatActivity {
                     public void onClick(View view) {
                         ///////// viết code thêm o đây///////////////////////////////////
                         try {
-                            int ID_LOAI = spinnerThemMUCCHi.getSelectedItemPosition() + 1;
+                            int ID_LOAI = spinnerThemMUCCHi.getSelectedItemPosition();
                             String MUC_CHI = txtMucChi.getText().toString();
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("ID_LOAI", ID_LOAI);
                             contentValues.put("MUC_CHI", MUC_CHI);
+
+                            contentValues.put("ofUser", Login.idUser);
                             SQLiteDatabase database = Database.initDatabase(AllHangMuc.this, DATABASE_NAME);
                             database.insert("DM_CHI", null, contentValues);
                             Toast.makeText(AllHangMuc.this, "Thêm thành công!!!", Toast.LENGTH_SHORT).show();
@@ -276,6 +265,7 @@ public class AllHangMuc extends AppCompatActivity {
                             String MUC_CHI = txtMucThu.getText().toString();
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("MUC_THU", MUC_CHI);
+                            contentValues.put("ofUser", Login.idUser);
                             SQLiteDatabase database = Database.initDatabase(AllHangMuc.this, DATABASE_NAME);
                             database.insert("DM_THU", null, contentValues);
                             Toast.makeText(AllHangMuc.this, "Thêm thành công!!!", Toast.LENGTH_SHORT).show();
@@ -380,7 +370,8 @@ public class AllHangMuc extends AppCompatActivity {
     private void ReaddataDM_CHI()// load dư lieu len list
     {
         database = Database.initDatabase(this, DATABASE_NAME);
-        Cursor cursor = database.rawQuery("SELECT * FROM DM_CHI", null);
+        int kk = Login.idUser;
+        Cursor cursor = database.rawQuery("SELECT * FROM DM_CHI WHERE ofUser = ? or ofUser = ?", new String[]{0 + "", Login.idUser + ""});
         lstdmc.clear();
         lst.clear();
         int ID;
@@ -400,11 +391,33 @@ public class AllHangMuc extends AppCompatActivity {
         arrayAdapter.notifyDataSetChanged();
     }
 
+    void setSpinnerChi(int i) {
+        database = Database.initDatabase(AllHangMuc.this, DATABASE_NAME);
+        Cursor cursor = database.rawQuery("SELECT * FROM DM_CHI WHERE ID_LOAI = ? and ( ofUser = ? or ofUser = ?)", new String[]{lstldm.get(i).ID + "", 0 + "", Login.idUser + ""});
+        lstdmc.clear();
+        lst.clear();
+        int ID;
+        int ID_LOAI;
+        String MUC_CHI;
+        int ofUser;
+        for (int j = 0; j < cursor.getCount(); j++)// cho chạy cursor là con tro
+        {
+            cursor.moveToPosition(j);
+            ID = cursor.getInt(0);
+            ID_LOAI = cursor.getInt(2);
+            MUC_CHI = cursor.getString(1);
+            ofUser = Integer.parseInt(cursor.getString(3));
+            lstdmc.add(new DM_CHI(ID, ID_LOAI, MUC_CHI, ofUser));
+            lst.add(MUC_CHI);
+        }
+        arrayAdapter.notifyDataSetChanged();
+    }
     private void ReaddataLoaiDM_CHI()// load dư lieu len list
     {
         database = Database.initDatabase(this, DATABASE_NAME);
         Cursor cursor = database.rawQuery("SELECT * FROM LOAI_DM_CHI", null);
         lstldm.clear();
+        lstldm.add(new LOAI_DM_CHI(0, "Tất Cả"));
         int ID;
         String TEN_LOAI;
         for (int i = 0; i < cursor.getCount(); i++)// cho chạy cursor là con tro
@@ -420,7 +433,8 @@ public class AllHangMuc extends AppCompatActivity {
     private void ReaddataDM_THU()// load dư lieu len list
     {
         database = Database.initDatabase(this, DATABASE_NAME);
-        Cursor cursor = database.rawQuery("SELECT * FROM DM_THU", null);
+        int kkk = Login.idUser;
+        Cursor cursor = database.rawQuery("SELECT * FROM DM_THU WHERE ofUser = ? or ofUser = ?", new String[]{0 + "", Login.idUser + ""});
         lstdmt = new ArrayList<>();
         lstDMT.clear();
         int ID;

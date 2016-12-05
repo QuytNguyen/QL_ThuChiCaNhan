@@ -16,11 +16,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
         android:text="New Text"
         android:textColor="#853a3a"
-        android:textSize="25dp" />
+        android:textSize="15dp" />
 
 </RelativeLayout>
