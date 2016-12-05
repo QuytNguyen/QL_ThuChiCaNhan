@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,80 +100,6 @@ public class chi extends AppCompatActivity {
                 Readdata();
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Dialog dialog = new Dialog(chi.this);
-                dialog.setTitle("Sửa thông tin chi");
-                dialog.setContentView(R.layout.diologsuachi);
-                dialog.setCancelable(false);
-                txtSoTiens = (EditText) dialog.findViewById(R.id.editSTT);
-                spinnerKCs = (Spinner) dialog.findViewById(R.id.editTaiKhoanChi);
-                txtChiChos = (EditText) dialog.findViewById(R.id.editText4);
-                txtGhiChus = (EditText) dialog.findViewById(R.id.editText5);
-                spinnerTKs = (Spinner) dialog.findViewById(R.id.spinnerTaiKhoanChi);
-                txtNgayChis = (EditText) dialog.findViewById(R.id.editNgayChi);
-                spinnerTKs.setAdapter(adapterSpinnerTaiKhoan);
-                btnluu = (Button) dialog.findViewById(R.id.button);
-                btnhuy = (Button) dialog.findViewById(R.id.buttonhuy);
-                btnCHons = (Button) dialog.findViewById(R.id.buttonDataChi);
-                spinnerKCs.setAdapter(adapterDMCHI);
-                ReaddataDM_CHI();
-                ReaddataTaiKhoan();
-                double tien = list.get(i).SO_TIEN;
-                txtChiChos.setText(list.get(i).CHI_CHO);
-                txtGhiChus.setText(list.get(i).GHI_CHU);
-                txtSoTiens.setText(tien + "");
-                Date d = list.get(i).NGAY_CHI;
-                Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-                String strDate = formatter.format(d);
-                txtNgayChis.setText(strDate);
-                final int j = i;
-                int vitriKC = Find(listdm, list.get(i).ID_MUC_CHI);
-                int vitriTK = FindTK(listtk, list.get(i).TAI_KHOAN);
-                spinnerKCs.setSelection(vitriKC);
-                spinnerTKs.setSelection(vitriTK);
-                btnluu.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        try {
-                            int ID_MUC_CHI = spinnerKCs.getSelectedItemPosition();
-                            ID_MUC_CHI = listdm.get(ID_MUC_CHI).ID;
-                            int TAI_KHOAN = spinnerTKs.getSelectedItemPosition();
-                            TAI_KHOAN = listtk.get(TAI_KHOAN).ID;
-                            double SO_TIEN = Double.parseDouble(txtSoTiens.getText().toString());
-                            String CHI_CHO = txtChiChos.getText().toString();
-                            String GHI_CHU = txtGhiChus.getText().toString();
-                            DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-                            String dateAsString = txtNgayChis.getText().toString();
-                            Date NGAY_CHI = sourceFormat.parse(dateAsString);
-
-                            ContentValues contentValues = new ContentValues();
-                            contentValues.put("ID_MUC_CHI", ID_MUC_CHI);
-                            contentValues.put("SO_TIEN", SO_TIEN);
-                            contentValues.put("ID_TAI_KHOAN", TAI_KHOAN);
-                            contentValues.put("NGAY_CHI", NGAY_CHI.toString());
-                            contentValues.put("CHI_CHO", CHI_CHO);
-                            contentValues.put("GHI_CHU", GHI_CHU);
-                            database.update("ND_CHI", contentValues, "ID = ?", new String[]{list.get(j).ID + ""});
-                            Toast.makeText(chi.this, "Sửa thành công!!!", Toast.LENGTH_SHORT).show();
-                        } catch (Exception ex) {
-                            Toast.makeText(chi.this, "Sủa không thành công!!!", Toast.LENGTH_SHORT).show();
-                        }
-                        dialog.dismiss();
-                        Readdata();
-                    }
-                });
-                btnhuy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-            }
-        });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -213,6 +140,81 @@ public class chi extends AppCompatActivity {
         spec2.setContent(R.id.tab2chi);
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
+    }
+
+    public void editChi(View v) {
+        Button btn = (Button) v;
+        int i = (int) btn.getTag();
+
+        final Dialog dialog = new Dialog(chi.this);
+        dialog.setTitle("Sửa thông tin chi");
+        dialog.setContentView(R.layout.diologsuachi);
+        dialog.setCancelable(false);
+        txtSoTiens = (EditText) dialog.findViewById(R.id.editSTT);
+        spinnerKCs = (Spinner) dialog.findViewById(R.id.editTaiKhoanChi);
+        txtChiChos = (EditText) dialog.findViewById(R.id.editText4);
+        txtGhiChus = (EditText) dialog.findViewById(R.id.editText5);
+        spinnerTKs = (Spinner) dialog.findViewById(R.id.spinnerTaiKhoanChi);
+        txtNgayChis = (EditText) dialog.findViewById(R.id.editNgayChi);
+        spinnerTKs.setAdapter(adapterSpinnerTaiKhoan);
+        btnluu = (Button) dialog.findViewById(R.id.button);
+        btnhuy = (Button) dialog.findViewById(R.id.buttonhuy);
+        btnCHons = (Button) dialog.findViewById(R.id.buttonDataChi);
+        spinnerKCs.setAdapter(adapterDMCHI);
+        ReaddataDM_CHI();
+        ReaddataTaiKhoan();
+        double tien = list.get(i).SO_TIEN;
+        txtChiChos.setText(list.get(i).CHI_CHO);
+        txtGhiChus.setText(list.get(i).GHI_CHU);
+        txtSoTiens.setText(tien + "");
+        Date d = list.get(i).NGAY_CHI;
+        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(d);
+        txtNgayChis.setText(strDate);
+        final int j = i;
+        int vitriKC = Find(listdm, list.get(i).ID_MUC_CHI);
+        int vitriTK = FindTK(listtk, list.get(i).TAI_KHOAN);
+        spinnerKCs.setSelection(vitriKC);
+        spinnerTKs.setSelection(vitriTK);
+        btnluu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int ID_MUC_CHI = spinnerKCs.getSelectedItemPosition();
+                    ID_MUC_CHI = listdm.get(ID_MUC_CHI).ID;
+                    int TAI_KHOAN = spinnerTKs.getSelectedItemPosition();
+                    TAI_KHOAN = listtk.get(TAI_KHOAN).ID;
+                    double SO_TIEN = Double.parseDouble(txtSoTiens.getText().toString());
+                    String CHI_CHO = txtChiChos.getText().toString();
+                    String GHI_CHU = txtGhiChus.getText().toString();
+                    DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String dateAsString = txtNgayChis.getText().toString();
+                    Date NGAY_CHI = sourceFormat.parse(dateAsString);
+
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("ID_MUC_CHI", ID_MUC_CHI);
+                    contentValues.put("SO_TIEN", SO_TIEN);
+                    contentValues.put("ID_TAI_KHOAN", TAI_KHOAN);
+                    contentValues.put("NGAY_CHI", NGAY_CHI.toString());
+                    contentValues.put("CHI_CHO", CHI_CHO);
+                    contentValues.put("GHI_CHU", GHI_CHU);
+                    database.update("ND_CHI", contentValues, "ID = ?", new String[]{list.get(j).ID + ""});
+                    Toast.makeText(chi.this, "Sửa thành công!!!", Toast.LENGTH_SHORT).show();
+                } catch (Exception ex) {
+                    Toast.makeText(chi.this, "Sủa không thành công!!!", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+                Readdata();
+            }
+        });
+        btnhuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public void getDefaultInforkc() {

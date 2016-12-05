@@ -207,12 +207,7 @@ public class Thu extends AppCompatActivity {
             ID_TAI_KHOAN = cursor.getInt(2);
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
             String temp = cursor.getString(4);
-            try {
-                NGAY_THU = formatter.parse(temp);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
+            NGAY_THU = new Date(temp);
             GHI_CHU = cursor.getString(5);
             listndt.add(new ND_THU(ID, ID_MUC_THU, SO_TIEN, ID_TAI_KHOAN, NGAY_THU, GHI_CHU));
         }

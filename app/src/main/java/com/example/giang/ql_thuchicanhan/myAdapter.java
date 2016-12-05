@@ -201,11 +201,13 @@ class AdapterChi extends BaseAdapter {
         TextView txtSoTien = (TextView) row.findViewById(R.id.textviewSoTienItem);
         TextView txtTaiKhoanChi = (TextView) row.findViewById(R.id.textViewItemTentaiKhoanThu);
         ImageView listView = (ImageView) row.findViewById(R.id.imageViewItemThu);
+        Button btnEditChi = (Button) row.findViewById(R.id.btnEditChi);
         listView.setImageResource(R.drawable.vi);
         final ND_CHI chi = list.get(i);
         txtTenKhoanChi.setText(tenmucchi(listdm, chi.ID_MUC_CHI));
         txtSoTien.setText(TaiKhoanAdapter.formatNumber(chi.SO_TIEN));
         txtTaiKhoanChi.setText(TaiKhoanChi(listtk, chi.TAI_KHOAN));
+        btnEditChi.setTag(i);
         return row;
     }
 

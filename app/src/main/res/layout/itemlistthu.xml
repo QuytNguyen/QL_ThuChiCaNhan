@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:text="Thu: "
         android:textColor="#040404"
         android:textSize="20dp" />
@@ -44,31 +45,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/textView20"
         android:layout_toRightOf="@+id/textView20"
         android:text="New Text"
         android:textColor="#040404"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textViewItemTentaiKhoanThu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView20"
-        android:text="New Text"
-        android:textColor="#b2acac"
-        android:textSize="20dp" />
-
     <ImageView
         android:id="@+id/imageViewItemThu"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/textViewItemTentaiKhoanThu"
-        android:layout_toEndOf="@+id/textViewItemTentaiKhoanThu"
-        android:layout_toRightOf="@+id/textViewItemTentaiKhoanThu" />
+        android:layout_alignBottom="@+id/btnSuaThu"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:id="@+id/btnSuaThu"
@@ -79,4 +70,15 @@
         android:layout_below="@+id/textView21"
         android:onClick="editNDThu"
         android:text="Sửa" />
+
+    <TextView
+        android:id="@+id/textViewItemTentaiKhoanThu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageViewItemThu"
+        android:layout_toEndOf="@+id/imageViewItemThu"
+        android:layout_toRightOf="@+id/imageViewItemThu"
+        android:text="New Text"
+        android:textColor="#b2acac"
+        android:textSize="20dp" />
 </RelativeLayout>

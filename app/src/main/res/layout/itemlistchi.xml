@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView20"
@@ -10,6 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:text="Chi:"
         android:textColor="#040404"
         android:textSize="20dp" />
@@ -43,30 +44,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/textView20"
         android:layout_toRightOf="@+id/textView20"
         android:text="New Text"
         android:textColor="#040404"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textViewItemTentaiKhoanThu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView21"
-        android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@+id/imageViewItemThu"
-
-        android:layout_toStartOf="@+id/imageViewItemThu"
-        android:text="New Text"
-        android:textColor="#b2acac"
-        android:textSize="20dp" />
-
     <ImageView
         android:id="@+id/imageViewItemThu"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_alignBottom="@+id/btnEditChi"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/btnEditChi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textViewItemTentaiKhoanThu" />
+        android:layout_below="@+id/textView21"
+        android:onClick="editChi"
+        android:text="Sửa" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnEditChi"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@+id/imageViewItemThu"
+        android:layout_toRightOf="@+id/imageViewItemThu"
+        android:text="New Text"
+        android:textColor="#b2acac"
+        android:textSize="20dp" />
 </RelativeLayout>
