@@ -78,5 +78,6 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewTenKhoanChiItem" />
+        android:layout_below="@+id/textViewTenKhoanChiItem"
+        android:onClick="editChi" />
 </RelativeLayout>

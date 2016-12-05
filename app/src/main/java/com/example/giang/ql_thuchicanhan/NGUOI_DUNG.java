@@ -31,7 +31,9 @@ class LOAI_TAI_KHOAN {
     String TEN_LOAI;
 
     public LOAI_TAI_KHOAN() {
+
     }
+
 
     public LOAI_TAI_KHOAN(int ID, String TEN_LOAI) {
         this.ID = ID;
@@ -128,15 +130,9 @@ class TAI_KHOAN implements Serializable {
             String TEN_TAI_KHOAN = cursor.getString(1);
             this.ID_NGUOI_DUNG = cursor.getInt(2);
             this.SO_TIEN = cursor.getDouble(3);
-            String date = cursor.getString(4);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String currentTime = sdf.format(date);
-
-            try {
-                this.NGAY_TAO = sdf.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String temp = cursor.getString(4);
+            Date NGAY_TAO = new Date(temp);
             this.LOAI_TAI_KHOAN = cursor.getInt(5);
             this.GHI_CHU = cursor.getString(6);
             list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
@@ -156,15 +152,9 @@ class TAI_KHOAN implements Serializable {
             String TEN_TAI_KHOAN = cursor.getString(1);
             this.ID_NGUOI_DUNG = cursor.getInt(2);
             this.SO_TIEN = cursor.getDouble(3);
-            String date = cursor.getString(4);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String currentTime = sdf.format(date);
-
-            try {
-                this.NGAY_TAO = sdf.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String temp = cursor.getString(4);
+            Date NGAY_TAO = new Date(temp);
             this.LOAI_TAI_KHOAN = cursor.getInt(5);
             this.GHI_CHU = cursor.getString(6);
             list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));

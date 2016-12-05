@@ -352,7 +352,7 @@ class AdapterThu extends BaseAdapter {
         listView.setImageResource(R.drawable.vi);
         final ND_THU thu = list.get(i);
         txtTenKhoanThu.setText(tenmucthu(listdm, thu.ID_MUC_THU));
-        txtSoTien.setText(thu.SO_TIEN + "");
+        txtSoTien.setText(TaiKhoanAdapter.formatNumber(thu.SO_TIEN));
         txtTaiKhoanThu.setText(TaiKhoanThu(listtk, (int) thu.ID_TAI_KHOAN));
         btnSuaThu.setTag(i);
         btnSuaThu.setImageResource(R.drawable.edit);

@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -97,7 +98,7 @@ public class Thu extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int idrow = i;
                 AlertDialog.Builder builder = new AlertDialog.Builder(Thu.this);
-                builder.setTitle("Xóa mục thu này?");
+                builder.setTitle("Xóa khoản thu này?");
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //TODO
@@ -135,14 +136,9 @@ public class Thu extends AppCompatActivity {
             int ID_NGUOI_DUNG = cursor.getInt(2);
             double SO_TIEN = cursor.getDouble(3);
             String date = cursor.getString(4);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String currentTime = sdf.format(date);
-            Date NGAY_TAO = new Date(System.currentTimeMillis());
-            try {
-                NGAY_TAO = sdf.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            String temp = cursor.getString(4);
+            Date NGAY_TAO = new Date(temp);
             int LOAI_TAI_KHOAN = cursor.getInt(5);
             String GHI_CHU = cursor.getString(6);
             listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
@@ -197,7 +193,6 @@ public class Thu extends AppCompatActivity {
         int ID_MUC_THU;
         int ID_TAI_KHOAN;
         double SO_TIEN;
-        Date NGAY_THU = new Date(System.currentTimeMillis());
         String GHI_CHU;
         for (int i = listndt.size(); i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
@@ -207,7 +202,7 @@ public class Thu extends AppCompatActivity {
             ID_TAI_KHOAN = cursor.getInt(2);
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
             String temp = cursor.getString(4);
-            NGAY_THU = new Date(temp);
+            Date NGAY_THU = new Date(temp);
             GHI_CHU = cursor.getString(5);
             listndt.add(new ND_THU(ID, ID_MUC_THU, SO_TIEN, ID_TAI_KHOAN, NGAY_THU, GHI_CHU));
         }
@@ -266,7 +261,7 @@ public class Thu extends AppCompatActivity {
     }
 
     public void editNDThu(View v) {
-        Button btn = (Button) v;
+        ImageButton btn = (ImageButton) v;
         int i = (int) btn.getTag();
         final Dialog dialog = new Dialog(Thu.this);
 
@@ -318,6 +313,8 @@ public class Thu extends AppCompatActivity {
                     contentValues.put("NGAY_THU", NGAY_THU.toString());
                     contentValues.put("GHI_CHU", GHI_CHU);
                     database.update("ND_THU", contentValues, "ID = ?", new String[]{ID + ""});
+
+//                    listndt.add(new ND_THU(ID, ID_MUC_THU, SO_TIEN, ID_TAI_KHOAN, NGAY_THU, GHI_CHU));
                     adapterThu.notifyDataSetChanged();
                     Toast.makeText(Thu.this, "Sửa thành công!!!", Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {

@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -145,7 +146,7 @@ public class chi extends AppCompatActivity {
 
 
     public void editChi(View v) {
-        Button btn = (Button) v;
+        ImageButton btn = (ImageButton) v;
         int i = (int) btn.getTag();
 
         final Dialog dialog = new Dialog(chi.this);
