@@ -19,25 +19,44 @@
         android:textColor="#ffffff"
         android:textSize="30dp" />
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="20dp"
+        android:text="Loại tài khoản"
+        android:textColor="#1882f3"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_toEndOf="@+id/textView12"
+        android:layout_toRightOf="@+id/textView12" />
+
     <ListView
         android:id="@+id/lstTaiKhoan"
         android:layout_width="wrap_content"
-        android:layout_height="380dp"
-        android:layout_below="@+id/textView"
+        android:layout_height="300dp"
+        android:layout_below="@+id/textView12"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:focusable="false" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/textView12"
+        android:layout_alignRight="@+id/textView12"
         android:layout_below="@+id/lstTaiKhoan"
-        android:layout_marginLeft="75dp"
-        android:layout_marginStart="75dp"
         android:text="Tổng tiền:"
-        android:textColor="#f71414"
+        android:textColor="#4571ea"
         android:textSize="20dp" />
 
     <TextView
@@ -45,18 +64,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView4"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:text="kết quả"
-        android:textColor="#f71414"
+        android:textColor="#280204"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/buttonThemTK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textViewKQ"
-        android:layout_alignRight="@+id/textViewKQ"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/textViewKQ"
+        android:layout_centerHorizontal="true"
         android:text="Thêm" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textViewKQ"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/textViewKQ"
+        android:layout_toRightOf="@+id/textViewKQ"
+        android:text="đ"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#2e0505" />
+
+
 </RelativeLayout>

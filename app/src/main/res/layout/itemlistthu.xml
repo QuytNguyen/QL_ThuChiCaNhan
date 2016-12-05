@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/textView20"
@@ -10,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Chi:"
+        android:text="Thu: "
         android:textColor="#040404"
         android:textSize="20dp" />
 
@@ -28,7 +29,7 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textviewSoTienItem"
+        android:id="@+id/textviewSoTienItemThu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -39,7 +40,7 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textViewTenKhoanChiItem"
+        android:id="@+id/textViewTenKhoanThuItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -53,11 +54,10 @@
         android:id="@+id/textViewItemTentaiKhoanThu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView21"
-        android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@+id/imageViewItemThu"
 
-        android:layout_toStartOf="@+id/imageViewItemThu"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView20"
         android:text="New Text"
         android:textColor="#b2acac"
         android:textSize="20dp" />
@@ -66,7 +66,17 @@
         android:id="@+id/imageViewItemThu"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_alignBottom="@+id/textViewItemTentaiKhoanThu"
+        android:layout_toEndOf="@+id/textViewItemTentaiKhoanThu"
+        android:layout_toRightOf="@+id/textViewItemTentaiKhoanThu" />
+
+    <Button
+        android:id="@+id/btnSuaThu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textViewItemTentaiKhoanThu" />
+        android:layout_below="@+id/textView21"
+        android:onClick="editNDThu"
+        android:text="Sửa" />
 </RelativeLayout>

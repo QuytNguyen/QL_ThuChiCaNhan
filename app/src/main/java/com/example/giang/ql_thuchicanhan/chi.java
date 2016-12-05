@@ -27,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -121,9 +123,9 @@ public class chi extends AppCompatActivity {
                 txtChiChos.setText(list.get(i).CHI_CHO);
                 txtGhiChus.setText(list.get(i).GHI_CHU);
                 txtSoTiens.setText(tien + "");
-                SimpleDateFormat dft = null;
-                dft = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String strDate = dft.format(list.get(i).NGAY_CHI.getTime());
+                Date d = list.get(i).NGAY_CHI;
+                Format formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String strDate = formatter.format(d);
                 txtNgayChis.setText(strDate);
                 final int j = i;
                 int vitriKC = Find(listdm, list.get(i).ID_MUC_CHI);
@@ -141,12 +143,15 @@ public class chi extends AppCompatActivity {
                             double SO_TIEN = Double.parseDouble(txtSoTiens.getText().toString());
                             String CHI_CHO = txtChiChos.getText().toString();
                             String GHI_CHU = txtGhiChus.getText().toString();
+                            DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            String dateAsString = txtNgayChis.getText().toString();
+                            Date NGAY_CHI = sourceFormat.parse(dateAsString);
 
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("ID_MUC_CHI", ID_MUC_CHI);
                             contentValues.put("SO_TIEN", SO_TIEN);
                             contentValues.put("ID_TAI_KHOAN", TAI_KHOAN);
-                            contentValues.put("NGAY_CHI", txtNgayChis.getText().toString());
+                            contentValues.put("NGAY_CHI", NGAY_CHI.toString());
                             contentValues.put("CHI_CHO", CHI_CHO);
                             contentValues.put("GHI_CHU", GHI_CHU);
                             database.update("ND_CHI", contentValues, "ID = ?", new String[]{list.get(j).ID + ""});
@@ -240,13 +245,12 @@ public class chi extends AppCompatActivity {
     private void Readdata()// load dư lieu len list
     {
         database = Database.initDatabase(this, DATABASE_NAME);
-        Cursor cursor = database.rawQuery("SELECT * FROM ND_CHI", null);
+        Cursor cursor = database.rawQuery("SELECT ND_CHI.* FROM ND_CHI LEFT JOIN TAI_KHOAN ON ND_CHI.ID_TAI_KHOAN= TAI_KHOAN.ID where ID_NGUOI_DUNG = ?", new String[]{Login.idUser + ""});
         list.clear();
         int ID;
         int ID_MUC_CHI;
         double SO_TIEN;
         int TAI_KHOAN;
-        Date NGAY_CHI = new Date(System.currentTimeMillis());
         String CHI_CHO;
         String GHI_CHU;
         for (int i = 0; i < cursor.getCount(); i++)// cho chạy cursor là con tro
@@ -256,14 +260,9 @@ public class chi extends AppCompatActivity {
             ID_MUC_CHI = cursor.getInt(1);
             SO_TIEN = cursor.getInt(2);
             TAI_KHOAN = cursor.getInt(3);
-            SimpleDateFormat formatter = new SimpleDateFormat(
-                    "dd-MMM-yyyy HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
             String temp = cursor.getString(4);
-            try {
-                NGAY_CHI = formatter.parse(temp);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            Date NGAY_CHI = new Date(temp);
             CHI_CHO = cursor.getString(5);
             GHI_CHU = cursor.getString(6);
             list.add(new ND_CHI(ID, ID_MUC_CHI, SO_TIEN, TAI_KHOAN, NGAY_CHI, CHI_CHO, GHI_CHU));
@@ -315,8 +314,7 @@ public class chi extends AppCompatActivity {
             }
             int LOAI_TAI_KHOAN = cursor.getInt(5);
             String GHI_CHU = cursor.getString(6);
-            int ofUser = cursor.getInt(7);
-            listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
+            listtk.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
         }
         adapterSpinnerTaiKhoan.notifyDataSetChanged();
     }
@@ -330,16 +328,18 @@ public class chi extends AppCompatActivity {
             double SO_TIEN = Double.parseDouble(txtSoTien.getText().toString());
             String CHI_CHO = txtChiCho.getText().toString();
             String GHI_CHU = txtGhiChu.getText().toString();
-            Date dt = Calendar.getInstance().getTime();
+            DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String dateAsString = txtNgayChi.getText().toString();
+            Date NGAY_CHI = sourceFormat.parse(dateAsString);
             ContentValues contentValues = new ContentValues();
             contentValues.put("ID_MUC_CHI", ID_MUC_CHI);
             contentValues.put("SO_TIEN", SO_TIEN);
             contentValues.put("ID_TAI_KHOAN", TAI_KHOAN);
-            contentValues.put("NGAY_CHI", txtNgayChi.getText().toString());
+            contentValues.put("NGAY_CHI", NGAY_CHI.toString());
             contentValues.put("CHI_CHO", CHI_CHO);
             contentValues.put("GHI_CHU", GHI_CHU);
             database.insert("ND_CHI", null, contentValues);
-            Toast.makeText(chi.this, "Thêm thành công!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(chi.this, "Thêm thành công!!!" + NGAY_CHI, Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
             Toast.makeText(chi.this, "Thêm không thành công!!!", Toast.LENGTH_SHORT).show();
         }

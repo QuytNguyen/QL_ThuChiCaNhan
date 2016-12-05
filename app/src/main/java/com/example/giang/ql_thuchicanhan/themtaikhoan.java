@@ -87,14 +87,7 @@ public class themtaikhoan extends AppCompatActivity {
                 double SO_TIEN = Double.parseDouble(edtSoTien.getText().toString());
                 Date dt = Calendar.getInstance().getTime();
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                Date currentTime=new Date();
-//                try {
-//                    currentTime=sdf.parse(dt.toString());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String currentTime = sdf.format(dt);
+//                String currentTime = sdf.format(dt);
 //                try {
 //                    Date NGAY_TAO=sdf.parse(currentTime);
 //                } catch (ParseException e) {
@@ -105,7 +98,7 @@ public class themtaikhoan extends AppCompatActivity {
                 int LOAI_TAI_KHOAN = loaiTaiKhoan.ID;
                 String GHI_CHU = edtGhiChu.getText().toString();
                 if (i == null) {
-                    TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU, Login.idUser);
+                    TAI_KHOAN tk = new TAI_KHOAN(0, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, dt, LOAI_TAI_KHOAN, GHI_CHU);
                     tk.insertTAI_KHOAN(themtaikhoan.this, DATABASE_NAME, tk);
                 } else {
                     i.TEN_TAI_KHOAN = TEN_TAI_KHOAN;

@@ -62,9 +62,8 @@ class TAI_KHOAN implements Serializable {
     Date NGAY_TAO;
     int LOAI_TAI_KHOAN;
     String GHI_CHU;
-    int ofUser;
 
-    public TAI_KHOAN(int ID, String TEN_TAI_KHOAN, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO, int LOAI_TAI_KHOAN, String GHI_CHU, int ofUser) {
+    public TAI_KHOAN(int ID, String TEN_TAI_KHOAN, int ID_NGUOI_DUNG, double SO_TIEN, Date NGAY_TAO, int LOAI_TAI_KHOAN, String GHI_CHU) {
         this.ID = ID;
         this.TEN_TAI_KHOAN = TEN_TAI_KHOAN;
         this.ID_NGUOI_DUNG = ID_NGUOI_DUNG;
@@ -72,7 +71,6 @@ class TAI_KHOAN implements Serializable {
         this.NGAY_TAO = NGAY_TAO;
         this.LOAI_TAI_KHOAN = LOAI_TAI_KHOAN;
         this.GHI_CHU = GHI_CHU;
-        this.ofUser = ofUser;
     }
 
     public TAI_KHOAN(int ID, String TEN_TAI_KHOAN) {
@@ -83,11 +81,46 @@ class TAI_KHOAN implements Serializable {
     public TAI_KHOAN() {
     }
 
+    public static double Tiencon(Activity activity, String DATABASE_NAME, String ID_TAI_KHOAN) {
+        SQLiteDatabase database = Database.initDatabase(activity, DATABASE_NAME);
+        Cursor sotienChi = database.rawQuery("SELECT sum(SO_TIEN) from ND_CHI Where ID_TAI_KHOAN = ?", new String[]{ID_TAI_KHOAN});
+        double asotienCHi = 0;
+        try {
+
+            sotienChi.moveToPosition(0);
+            asotienCHi = sotienChi.getDouble(0);
+        } catch (Exception ex) {
+            asotienCHi = 0;
+        }
+
+
+        Cursor sotienThu = database.rawQuery("SELECT sum(SO_TIEN) from ND_THU Where ID_TAI_KHOAN = ?", new String[]{ID_TAI_KHOAN});
+        double asotienthu = 0;
+        try {
+
+            sotienThu.moveToPosition(0);
+            asotienthu = sotienThu.getDouble(0);
+        } catch (Exception ex) {
+            asotienthu = 0;
+        }
+        Cursor tongtien = database.rawQuery("SELECT * FROM TAI_KHOAN where ID =?", new String[]{ID_TAI_KHOAN});
+        double tongtiena = 0;
+        try {
+
+            tongtien.moveToPosition(0);
+            tongtiena = tongtien.getDouble(3);
+        } catch (Exception ex) {
+            tongtiena = 0;
+        }
+        return tongtiena - asotienCHi + asotienthu;
+
+    }
+
     public ArrayList<TAI_KHOAN> getTAI_KHOAN(Activity activity, SQLiteDatabase database, String DATABASE_NAME) {
         ArrayList<TAI_KHOAN> list = new ArrayList<>();
         database = Database.initDatabase(activity, DATABASE_NAME);
         String idUser = Login.idUser + "";
-        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN where ofUser = ?", new String[]{idUser});
+        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN where ID_NGUOI_DUNG = ?", new String[]{idUser});
         for (int i = 0; i < cursor.getCount(); i++)// cho ch?y cursor là con tro
         {
             cursor.moveToPosition(i);
@@ -106,8 +139,35 @@ class TAI_KHOAN implements Serializable {
             }
             this.LOAI_TAI_KHOAN = cursor.getInt(5);
             this.GHI_CHU = cursor.getString(6);
-            this.ofUser = Integer.parseInt(cursor.getString(7));
-            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU, ofUser));
+            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
+        }
+        return list;
+    }
+
+    public ArrayList<TAI_KHOAN> getTAI_KHOAN(Activity activity, SQLiteDatabase database, String DATABASE_NAME, int k) {
+        ArrayList<TAI_KHOAN> list = new ArrayList<>();
+        database = Database.initDatabase(activity, DATABASE_NAME);
+        String idUser = Login.idUser + "";
+        Cursor cursor = database.rawQuery("SELECT * FROM TAI_KHOAN where ID_NGUOI_DUNG = ? and LOAI_TAI_KHOAN =?", new String[]{idUser, k + ""});
+        for (int i = 0; i < cursor.getCount(); i++)// cho ch?y cursor là con tro
+        {
+            cursor.moveToPosition(i);
+            int ID = cursor.getInt(0);
+            String TEN_TAI_KHOAN = cursor.getString(1);
+            this.ID_NGUOI_DUNG = cursor.getInt(2);
+            this.SO_TIEN = cursor.getDouble(3);
+            String date = cursor.getString(4);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String currentTime = sdf.format(date);
+
+            try {
+                this.NGAY_TAO = sdf.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            this.LOAI_TAI_KHOAN = cursor.getInt(5);
+            this.GHI_CHU = cursor.getString(6);
+            list.add(new TAI_KHOAN(ID, TEN_TAI_KHOAN, ID_NGUOI_DUNG, SO_TIEN, NGAY_TAO, LOAI_TAI_KHOAN, GHI_CHU));
         }
         return list;
     }
@@ -139,25 +199,6 @@ class TAI_KHOAN implements Serializable {
         SQLiteDatabase database = Database.initDatabase(activity, DATABASE_NAME);
         database.delete("TAI_KHOAN", "ID= ?", new String[]{String.valueOf(tk.ID)});
     }
-
-//    public ArrayList<String> getListTenPB(ArrayList<PhongBan> lstPB)
-//    {
-//        ArrayList<String> lstTenPB= new ArrayList<>();
-//        for (int i=0; i<lstPB.size(); i++)
-//        {
-//            lstTenPB.add(lstPB.get(i).getTenPB());
-//        }
-//        return lstTenPB;
-//    }
-//    public ArrayList<String> getListMaPB(ArrayList<PhongBan> lstPB)
-//    {
-//        ArrayList<String> lstTenPB= new ArrayList<>();
-//        for (int i=0; i<lstPB.size(); i++)
-//        {
-//            lstTenPB.add(lstPB.get(i).getMaPB());
-//        }
-//        return lstTenPB;
-//    }
 }
 
 class LOAI_DM_CHI {
@@ -230,11 +271,11 @@ class ND_THU {
     int ID;
     int ID_MUC_THU;
     double SO_TIEN;
-    double ID_TAI_KHOAN;
+    int ID_TAI_KHOAN;
     Date NGAY_THU;
     String GHI_CHU;
 
-    public ND_THU(int ID, int ID_MUC_THU, double SO_TIEN, double ID_TAI_KHOAN, Date NGAY_THU, String GHI_CHU) {
+    public ND_THU(int ID, int ID_MUC_THU, double SO_TIEN, int ID_TAI_KHOAN, Date NGAY_THU, String GHI_CHU) {
         this.ID = ID;
         this.ID_MUC_THU = ID_MUC_THU;
         this.SO_TIEN = SO_TIEN;

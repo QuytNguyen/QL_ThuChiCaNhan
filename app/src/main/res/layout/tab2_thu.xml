@@ -4,19 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#37c3f6"
-        android:gravity="center"
-        android:text="Danh sách thu"
-        android:textSize="40dp"
-        android:textStyle="italic"
-        android:textColor="#4464f4" />
-
     <ListView
-        android:id="@+id/listchi"
+        android:id="@+id/listthu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>

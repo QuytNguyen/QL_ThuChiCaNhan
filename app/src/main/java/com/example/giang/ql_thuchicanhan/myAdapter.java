@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,11 +19,12 @@ import java.util.ArrayList;
  * Created by nguye on 30/11/2016.
  */
 class TaiKhoanAdapter extends BaseAdapter {
-    Context context;
+    Activity context;
+    String DATABASE_NAME = "misa.sqlite";
     private ArrayList<TAI_KHOAN> lst;
     private LayoutInflater inflater;//dùng để lấy ra file giao diện đã thiết kế (res/layot/
 
-    public TaiKhoanAdapter(Context context, ArrayList<TAI_KHOAN> list) {
+    public TaiKhoanAdapter(Activity context, ArrayList<TAI_KHOAN> list) {
         lst = list;
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -72,6 +74,7 @@ class TaiKhoanAdapter extends BaseAdapter {
         TAI_KHOAN data = lst.get(i);
         viewHolder.tvTen.setText(data.TEN_TAI_KHOAN);
         viewHolder.btnEdit.setTag(i);
+        viewHolder.tvTienCon.setText(formatNumber(TAI_KHOAN.Tiencon(context, DATABASE_NAME, data.ID + "")));
         //viewHolder.tvTienCon.setText("");
 //        int resID = context.getResources().getIdentifier(data.getHinh(),
 //                "drawable", context.getPackageName());
@@ -196,8 +199,8 @@ class AdapterChi extends BaseAdapter {
         View row = inflater.inflate(R.layout.itemlistchi, null);
         TextView txtTenKhoanChi = (TextView) row.findViewById(R.id.textViewTenKhoanChiItem);
         TextView txtSoTien = (TextView) row.findViewById(R.id.textviewSoTienItem);
-        TextView txtTaiKhoanChi = (TextView) row.findViewById(R.id.textViewItemTentaiKhoa);
-        ImageView listView = (ImageView) row.findViewById(R.id.imageViewItemChi);
+        TextView txtTaiKhoanChi = (TextView) row.findViewById(R.id.textViewItemTentaiKhoanThu);
+        ImageView listView = (ImageView) row.findViewById(R.id.imageViewItemThu);
         listView.setImageResource(R.drawable.vi);
         final ND_CHI chi = list.get(i);
         txtTenKhoanChi.setText(tenmucchi(listdm, chi.ID_MUC_CHI));
@@ -265,3 +268,228 @@ class AdapterLMC extends BaseAdapter {
         return row;
     }
 }
+
+class AdapterSpinnerKhoanThu extends BaseAdapter {
+    Activity context;
+    ArrayList<DM_THU> list;
+
+    public AdapterSpinnerKhoanThu(ArrayList<DM_THU> list, Activity context) {
+        this.list = list;
+        this.context = context;
+    }
+
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(R.layout.spinnerkhoanthu, null);
+        TextView txtTenKhoanThu = (TextView) row.findViewById(R.id.textViewSpinnerThu);
+        // ImageView listView=(ImageView) row.findViewById(R.id.imageView);
+        //listView.setImageResource(R.drawable.dm);
+        final DM_THU thu = list.get(i);
+        txtTenKhoanThu.setText(thu.MUC_THU);
+        return row;
+    }
+}
+
+class AdapterThu extends BaseAdapter {
+    Activity context;
+    ArrayList<ND_THU> list;
+    ArrayList<DM_THU> listdm;
+    ArrayList<TAI_KHOAN> listtk;
+
+    public AdapterThu(Activity context, ArrayList<ND_THU> list, ArrayList<DM_THU> listdm, ArrayList<TAI_KHOAN> listtk) {
+        this.context = context;
+        this.list = list;
+        this.listdm = listdm;
+        this.listtk = listtk;
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(R.layout.itemlistthu, null);
+        Button btnSuaThu = (Button) row.findViewById(R.id.btnSuaThu);
+        TextView txtTenKhoanThu = (TextView) row.findViewById(R.id.textViewTenKhoanThuItem);
+        TextView txtSoTien = (TextView) row.findViewById(R.id.textviewSoTienItemThu);
+        TextView txtTaiKhoanThu = (TextView) row.findViewById(R.id.textViewItemTentaiKhoanThu);
+        ImageView listView = (ImageView) row.findViewById(R.id.imageViewItemThu);
+        listView.setImageResource(R.drawable.vi);
+        final ND_THU thu = list.get(i);
+        txtTenKhoanThu.setText(tenmucthu(listdm, thu.ID_MUC_THU));
+        txtSoTien.setText(thu.SO_TIEN + "");
+        txtTaiKhoanThu.setText(TaiKhoanThu(listtk, (int) thu.ID_TAI_KHOAN));
+        btnSuaThu.setTag(i);
+        return row;
+    }
+
+    private String tenmucthu(ArrayList<DM_THU> lst, int x) {
+        String kq = "";
+        for (DM_THU dmthu : lst
+                ) {
+            if (x == dmthu.ID)
+                kq = dmthu.MUC_THU;
+        }
+        return kq;
+    }
+
+    private String TaiKhoanThu(ArrayList<TAI_KHOAN> lst, int x) {
+        String kq = "";
+        for (TAI_KHOAN dmthu : lst
+                ) {
+            if (x == dmthu.ID)
+                kq = dmthu.TEN_TAI_KHOAN;
+        }
+        return kq;
+    }
+
+
+}
+
+class AdapterDMT extends BaseAdapter {
+    Activity context;
+    ArrayList<DM_THU> list;
+
+    public AdapterDMT(Activity context, ArrayList<DM_THU> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = inflater.inflate(R.layout.spinnerkhoanthu, null);
+        TextView txtTenKhoanThu = (TextView) row.findViewById(R.id.textViewSpinnerThu);
+        final DM_THU thu = list.get(i);
+        txtTenKhoanThu.setText(thu.MUC_THU);
+        return row;
+    }
+}
+//class  AdapterLoaiTK extends  BaseAdapter {
+//    Activity context;
+//    ArrayList<LOAI_TAI_KHOAN> list;
+//
+//    public AdapterLoaiTK(Activity context, ArrayList<LOAI_TAI_KHOAN> list) {
+//        this.context = context;
+//        this.list = list;
+//    }
+//    @Override
+//    public int getCount() {
+//        return list.size();
+//    }
+//
+//    @Override
+//    public Object getItem(int i) {
+//        return null;
+//    }
+//
+//    @Override
+//    public long getItemId(int i) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public View getView(int i, View view, ViewGroup viewGroup) {
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View row = inflater.inflate(R.layout.itemlistloaitk, null);
+//        TextView txtTenKhoanThu = (TextView) row.findViewById(R.id.textViewTKhoan);
+////        listView.setImageResource(imgid[i]);
+//        final LOAI_TAI_KHOAN thu = list.get(i);
+//        txtTenKhoanThu.setText(thu.TEN_LOAI);
+//        return row;
+//    }
+//}
+//
+//class AdapterTaiKHoan extends  BaseAdapter{
+//    Activity context;
+//    ArrayList<TAI_KHOAN> list;
+//
+//    public AdapterTaiKHoan(Activity context, ArrayList<TAI_KHOAN> list) {
+//        this.context = context;
+//        this.list = list;
+//    }
+//    @Override
+//    public int getCount() {
+//        return list.size();
+//    }
+//
+//    @Override
+//    public Object getItem(int i) {
+//        return null;
+//    }
+//
+//    @Override
+//    public long getItemId(int i) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public View getView(int i, View view, ViewGroup viewGroup) {
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View row = inflater.inflate(R.layout.itemlisttaikhoan, null);
+//        TextView txtTenKhoanThu = (TextView) row.findViewById(R.id.textViewTK);
+//        TextView txtSoTien = (TextView) row.findViewById(R.id.textView2);
+//        //ImageView listView = (ImageView) row.findViewById(R.id.imageView2);
+//        final TAI_KHOAN thu = list.get(i);
+//        txtTenKhoanThu.setText(thu.TEN_TAI_KHOAN);
+//        txtSoTien.setText(formatNumber(thu.SO_TIEN));
+//
+//        return row;
+//    }
+//    public static String formatNumber(double number) {
+//        try {
+//            NumberFormat formatter = new DecimalFormat("###,###");
+//            String resp = formatter.format(number);
+//            resp = resp.replaceAll(",", ".");
+//            return resp;
+//        } catch (Exception e) {
+//            return "";
+//        }
+//    }
+//}
+
